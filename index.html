@@ -15,13 +15,13 @@
 
     <style>
         /* Áp dụng phông Roboto cho toàn bộ trang */
-        body { font-family: 'Roboto', sans-serif; background-color: #f0f2f5; position: relative; overflow-x: hidden; }
+        body { font-family: 'Roboto', sans-serif; background-color: #fff7ed; position: relative; overflow-x: hidden; } /* Màu nền cam nhạt ấm áp cho Tết */
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        ::-webkit-scrollbar-thumb { background: #c2410c; border-radius: 4px; } /* Màu cam đậm */
+        ::-webkit-scrollbar-thumb:hover { background: #9a3412; }
 
         .loader {
             border: 4px solid #f3f3f3;
@@ -44,14 +44,15 @@
 
         /* Input Focus Effects */
         .input-group:focus-within label {
-            color: #059669; /* Green-600 */
+            color: #d97706; /* Amber-600 - Màu vàng đồng */
         }
         .input-group:focus-within i {
-            color: #059669; /* Green-600 */
+            color: #d97706; /* Amber-600 */
         }
         input:focus, select:focus, textarea:focus {
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.1), 0 2px 4px -1px rgba(5, 150, 105, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.1), 0 2px 4px -1px rgba(217, 119, 6, 0.06);
+            border-color: #fbbf24; /* Amber-400 */
         }
 
         /* Button Hover Effects */
@@ -66,9 +67,9 @@
             transform: translateY(0);
         }
 
-        /* Gradient Brand Color */
+        /* Gradient Brand Color - Tết Theme (Red/Gold) */
         .bg-brand-gradient {
-            background: linear-gradient(135deg, #059669 0%, #0d9488 100%); /* Emerald to Teal */
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%); /* Red to Orange */
         }
         
         /* Toast notification */
@@ -81,8 +82,8 @@
         .preview-box {
             position: relative;
             aspect-ratio: 8/5;
-            background-color: #f9fafb;
-            border: 2px dashed #d1d5db;
+            background-color: #fff;
+            border: 2px dashed #fcd34d; /* Vàng */
             border-radius: 0.75rem;
             display: flex;
             align-items: center;
@@ -91,8 +92,8 @@
             transition: all 0.3s ease;
         }
         .preview-box:hover {
-            border-color: #059669;
-            background-color: #ecfdf5;
+            border-color: #dc2626; /* Đỏ */
+            background-color: #fff1f2;
         }
         .preview-box img { width: 100%; height: 100%; object-fit: cover; }
         .preview-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: white; padding: 4px; font-size: 0.75rem; text-align: center; }
@@ -100,64 +101,176 @@
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
         input[type="date"] { appearance: none; -webkit-appearance: none; position: relative; }
 
-        /* Snow Effect CSS */
-        .snowflake {
+        /* TET EFFECT CSS */
+        .tet-item {
             position: fixed;
-            top: -20px;
+            top: -50px;
             z-index: 9999;
-            color: #e0f2fe; /* Light blue-ish white */
-            text-shadow: 0 0 2px rgba(0,0,0,0.1);
             pointer-events: none;
             user-select: none;
             cursor: default;
-            animation-name: fall;
+            animation-name: fall-tet;
             animation-timing-function: linear;
         }
         
-        @keyframes fall {
-            0% { transform: translateY(-20px) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+        @keyframes fall-tet {
+            0% { transform: translateY(-50px) rotate(0deg) translateX(0px); opacity: 1; }
+            25% { transform: translateY(25vh) rotate(90deg) translateX(20px); }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(-20px); }
+            75% { transform: translateY(75vh) rotate(270deg) translateX(20px); }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(0px); opacity: 0; }
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-2 sm:p-4">
+<body class="bg-orange-50 min-h-screen flex items-center justify-center p-2 sm:p-4">
 
-    <!-- Container for Snowflakes (Created via JS) -->
-    <div id="snow-container"></div>
+    <!-- Container for Tet Effects (Created via JS) -->
+    <div id="tet-container"></div>
 
-    <div class="w-full max-w-xl bg-white shadow-2xl rounded-2xl overflow-hidden animate-fade-in-up border border-gray-100 relative z-10">
+    <div class="w-full max-w-xl bg-white shadow-2xl rounded-2xl overflow-hidden animate-fade-in-up border border-orange-100 relative z-10">
         
         <!-- Header với Gradient và Logo -->
         <div class="bg-brand-gradient p-6 text-white text-center relative overflow-hidden">
-            <!-- Decorative Circles -->
-            <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-white opacity-10 blur-xl"></div>
-            <div class="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-white opacity-10 blur-xl"></div>
+            <!-- Decorative Circles (Lantern Glows) -->
+            <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-yellow-300 opacity-20 blur-xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-yellow-300 opacity-20 blur-xl"></div>
+
+            <!-- Decorative Branch -->
+             <div class="absolute top-0 left-0 opacity-20 transform -rotate-12 text-6xl pointer-events-none">🌸</div>
+             <div class="absolute bottom-2 right-2 opacity-20 transform rotate-12 text-5xl pointer-events-none">🌼</div>
 
             <!-- Logo Container -->
             <div class="absolute top-4 left-4">
                 <img src="logo.png.jpg" 
-                     onerror="this.src='https://placehold.co/100x100?text=Logo'" 
+                     onerror="this.src='https://placehold.co/100x100/red/white?text=SV'" 
                      alt="Sen Viet Group" 
-                     class="h-12 w-12 sm:h-14 sm:w-14 object-contain bg-white rounded-full p-1 shadow-md border-2 border-white/50 backdrop-blur-sm">
+                     class="h-12 w-12 sm:h-14 sm:w-14 object-contain bg-white rounded-full p-1 shadow-md border-2 border-yellow-200 backdrop-blur-sm">
             </div>
 
-            <h1 class="text-2xl sm:text-3xl font-bold uppercase tracking-wide drop-shadow-md mt-2">Sen Việt Group</h1>
-            <p class="text-white/90 text-sm mt-2 font-light">Hệ thống đăng kí tự động Sen Việt Group</p>
+            <div class="inline-block px-3 py-1 rounded-full bg-yellow-400/30 text-yellow-50 text-xs font-bold mb-1 border border-yellow-200/50">
+                ✨ CHÚC MỪNG NĂM MỚI 2026 ✨
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold uppercase tracking-wide drop-shadow-md mt-1">Sen Việt Group</h1>
+            <p class="text-white/90 text-sm mt-1 font-light italic">Vạn sự như ý - An khang thịnh vượng</p>
         </div>
 
         <div class="p-6 space-y-6">
             
             <!-- --- QR SECTION --- -->
-            <div class="bg-emerald-50 p-2 rounded-xl border border-emerald-100 shadow-inner">
-                <button onclick="toggleQrScanner()" id="btn-scan-qr" class="w-full flex items-center justify-center p-4 bg-white border border-emerald-200 rounded-lg shadow-sm hover:bg-emerald-50 text-emerald-700 font-bold transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3 group-hover:bg-emerald-200 transition-colors">
+            <div class="bg-orange-50 p-2 rounded-xl border border-orange-200 shadow-inner">
+                <button onclick="toggleQrScanner()" id="btn-scan-qr" class="w-full flex items-center justify-center p-4 bg-white border border-orange-200 rounded-lg shadow-sm hover:bg-orange-100 text-orange-700 font-bold transition-all duration-300 group">
+                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3 group-hover:bg-orange-200 transition-colors text-red-600">
                         <i class="fa-solid fa-qrcode text-xl"></i>
                     </div>
                     <span id="btn-scan-text">Quét QR (Mặt trước / Sau)</span>
                 </button>
 
                 <!-- Nút Tải Ảnh QR -->
-NGÀYHS TV LƯƠ
+                <div class="mt-3 text-center">
+                    <input type="file" id="qr-input-file" accept="image/*" class="hidden" onchange="handleQrFileUpload(this)">
+                    <label for="qr-input-file" class="cursor-pointer inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-orange-700 bg-white border border-orange-200 rounded-lg hover:bg-orange-50 transition-colors shadow-sm">
+                        <i class="fa-solid fa-image mr-2 text-red-500"></i>
+                        <span>Hoặc tải ảnh mã QR lên</span>
+                    </label>
+                </div>
+                
+                <!-- QR Scanner Container -->
+                <div id="qr-wrapper" class="hidden mt-3 p-2 bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <div id="qr-reader" class="rounded-lg overflow-hidden bg-black"></div>
+                </div>
+            </div>
+
+            <div class="relative flex py-2 items-center">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="flex-shrink-0 mx-4 text-gray-400 text-xs uppercase font-medium tracking-wider">Hoặc tải ảnh lên</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <!-- --- PHOTO UPLOAD SECTION (FRONT & BACK) --- -->
+            <div class="grid grid-cols-2 gap-4">
+                <!-- FRONT SIDE -->
+                <div>
+                    <!-- Đã bỏ capture="environment" để cho phép chọn ảnh từ thư viện -->
+                    <input id="file-front" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(this, 'front')">
+                    <label for="file-front" class="cursor-pointer block group h-full">
+                        <div class="preview-box group-hover:border-orange-400 h-full" id="preview-box-front">
+                            <div class="text-center text-gray-400 p-2 group-hover:text-orange-500 transition-colors">
+                                <i class="fa-solid fa-id-card text-4xl mb-2 transition-transform group-hover:scale-110 text-orange-300 group-hover:text-orange-500"></i>
+                                <div class="text-xs font-medium">Mặt trước CCCD</div>
+                            </div>
+                            <img id="img-front" class="hidden" src="">
+                            
+                            <!-- Rotate Button Front -->
+                            <button type="button" onclick="event.preventDefault(); rotateImage('front')" id="btn-rotate-front" class="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white w-8 h-8 rounded-full hidden flex items-center justify-center z-20 transition-all shadow-md" title="Xoay ảnh 90 độ">
+                                <i class="fa-solid fa-rotate-right text-sm"></i>
+                            </button>
+
+                            <div id="loading-front" class="absolute inset-0 bg-white/90 hidden flex-col items-center justify-center z-10 backdrop-blur-sm">
+                                <div class="loader mb-2 border-t-orange-500"></div>
+                                <span class="text-xs text-orange-600 font-bold animate-pulse">Đang xử lý...</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- BACK SIDE -->
+                <div>
+                    <!-- Đã bỏ capture="environment" để cho phép chọn ảnh từ thư viện -->
+                    <input id="file-back" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(this, 'back')">
+                    <label for="file-back" class="cursor-pointer block group h-full">
+                        <div class="preview-box group-hover:border-orange-400 h-full" id="preview-box-back">
+                            <div class="text-center text-gray-400 p-2 group-hover:text-orange-500 transition-colors">
+                                <i class="fa-regular fa-id-card text-4xl mb-2 transition-transform group-hover:scale-110 text-orange-300 group-hover:text-orange-500"></i>
+                                <div class="text-xs font-medium">Mặt sau CCCD</div>
+                            </div>
+                            <img id="img-back" class="hidden" src="">
+
+                            <!-- Rotate Button Back -->
+                            <button type="button" onclick="event.preventDefault(); rotateImage('back')" id="btn-rotate-back" class="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white w-8 h-8 rounded-full hidden flex items-center justify-center z-20 transition-all shadow-md" title="Xoay ảnh 90 độ">
+                                <i class="fa-solid fa-rotate-right text-sm"></i>
+                            </button>
+
+                            <div id="loading-back" class="absolute inset-0 bg-white/90 hidden flex-col items-center justify-center z-10 backdrop-blur-sm">
+                                <div class="loader mb-2 border-t-orange-500"></div>
+                                <span class="text-xs text-orange-600 font-bold animate-pulse">Đang xử lý...</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- --- FORM --- -->
+            <form id="employeeForm" onsubmit="submitForm(event)" class="space-y-5 pt-2">
+                
+                <!-- Job Info Section -->
+                <div class="bg-orange-50/80 p-4 rounded-xl border border-orange-200 space-y-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xs font-bold text-red-700 uppercase border-b border-red-100 pb-2 mb-1 flex items-center">
+                        <i class="fa-solid fa-briefcase mr-2 text-yellow-600"></i> Thông tin công việc
+                    </h3>
+                    
+                    <!-- Company Name -->
+                    <div class="input-group">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Tên công ty</label>
+                        <div class="relative group">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 transition-colors group-hover:text-red-500"><i class="fa-solid fa-building"></i></span>
+                            <select id="company" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm transition-all outline-none cursor-pointer">
+                                <option value="" disabled selected>-- Chọn công ty --</option>
+                                <option value="AAC CHÍNH THỨC">AAC CHÍNH THỨC</option>
+                                <option value="AAC THỜI VỤ">AAC THỜI VỤ</option>
+                                <option value="HS CHÍNH THỨC">HS CHÍNH THỨC</option>
+                                <!-- New Companies Added Below HS CHÍNH THỨC -->
+                                <option value="HS THỜI VỤ">HS THỜI VỤ</option>
+                                <option value="HS THỜI VỤ LƯƠNG NGÀY">HS THỜI VỤ LƯƠNG NGÀY</option>
+                                <option value="SHUNYUN">SHUNYUN</option>
+                                <option value="VINFAST">VINFAST</option>
+                                <option value="SAMSUNG">SAMSUNG</option>
+                                <option value="LG">LG</option>
+                                <option value="JAEYOUNG">JAEYOUNG</option>
+                                <option value="YUTO">YUTO</option>
+                                <option value="ING VINA">ING VINA</option>
+                                <option value="ASKEY CHÍNH THỨC">ASKEY CHÍNH THỨC</option>
+                                <option value="TENMA">TENMA</option>
+                                <!-- End New Companies -->
                                 <option value="GOERTEK CHÍNH THỨC">GOERTEK CHÍNH THỨC</option>
                                 <option value="GOERTEK THỜI VỤ">GOERTEK THỜI VỤ</option>
                                 <option value="YUZHAN CHÍNH THỨC">YUZHAN CHÍNH THỨC</option>
@@ -166,7 +279,6 @@ NGÀYHS TV LƯƠ
                                 <option value="VDS THỜI VỤ">VDS THỜI VỤ</option>
                                 <option value="SOHAN THỜI VỤ">SOHAN THỜI VỤ</option>
                                 <option value="LUXSHARE">LUXSHARE</option>
-                                <!-- New Companies -->
                                 <option value="Fukang">Fukang</option>
                                 <option value="Newwing">Newwing</option>
                                 <option value="Fuyu">Fuyu</option>
@@ -185,8 +297,8 @@ NGÀYHS TV LƯƠ
                     <div class="input-group">
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Nhà cung ứng</label>
                         <div class="relative group">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 transition-colors group-hover:text-emerald-500"><i class="fa-solid fa-users"></i></span>
-                            <select id="supplier" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition-all outline-none cursor-pointer">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 transition-colors group-hover:text-red-500"><i class="fa-solid fa-users"></i></span>
+                            <select id="supplier" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm transition-all outline-none cursor-pointer">
                                 <option value="" disabled selected>-- Chọn nhà cung ứng --</option>
                                 <option value="Sen Việt">Sen Việt</option>
                                 <option value="Sen Việt 1">Sen Việt 1</option>
@@ -209,7 +321,7 @@ NGÀYHS TV LƯƠ
                     <!-- Registration Date -->
                     <div class="input-group">
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Ngày Đăng Kí</label>
-                        <input type="date" id="registerDate" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition-all outline-none">
+                        <input type="date" id="registerDate" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm transition-all outline-none">
                     </div>
 
                 </div>
@@ -219,7 +331,7 @@ NGÀYHS TV LƯƠ
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Họ và tên</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="fullname" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none" placeholder="NGUYEN VAN A">
+                        <input type="text" id="fullname" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all outline-none" placeholder="NGUYEN VAN A">
                     </div>
                 </div>
 
@@ -228,7 +340,7 @@ NGÀYHS TV LƯƠ
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Số CCCD</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400"><i class="fa-solid fa-id-badge"></i></span>
-                        <input type="text" id="cccd" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none" placeholder="0xxxxxxxxxxx">
+                        <input type="text" id="cccd" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all outline-none" placeholder="0xxxxxxxxxxx">
                     </div>
                 </div>
 
@@ -236,13 +348,13 @@ NGÀYHS TV LƯƠ
                 <div class="grid grid-cols-2 gap-4">
                     <div class="input-group">
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Ngày sinh</label>
-                        <input type="date" id="dob" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition-all outline-none">
+                        <input type="date" id="dob" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm transition-all outline-none">
                     </div>
                     <div class="input-group">
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Giới tính</label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400"><i class="fa-solid fa-venus-mars"></i></span>
-                            <select id="gender" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition-all outline-none cursor-pointer">
+                            <select id="gender" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm transition-all outline-none cursor-pointer">
                                 <option value="" disabled selected>-- Chọn --</option>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
@@ -258,13 +370,13 @@ NGÀYHS TV LƯƠ
                 <div class="grid grid-cols-2 gap-4">
                     <div class="input-group">
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Ngày cấp</label>
-                        <input type="date" id="issueDate" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition-all outline-none">
+                        <input type="date" id="issueDate" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm transition-all outline-none">
                     </div>
                     <div class="input-group">
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Nơi cấp</label>
                          <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400"><i class="fa-solid fa-building-gov"></i></span>
-                            <input type="text" id="issuePlace" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none" placeholder="Bộ Công An...">
+                            <input type="text" id="issuePlace" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all outline-none" placeholder="Bộ Công An...">
                         </div>
                     </div>
                 </div>
@@ -274,7 +386,7 @@ NGÀYHS TV LƯƠ
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Địa chỉ thường trú</label>
                     <div class="relative">
                         <span class="absolute top-3 left-3 flex items-center text-gray-400"><i class="fa-solid fa-map-location-dot"></i></span>
-                        <textarea id="address" rows="2" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none" placeholder="Số nhà, đường, phường/xã..."></textarea>
+                        <textarea id="address" rows="2" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all outline-none" placeholder="Số nhà, đường, phường/xã..."></textarea>
                     </div>
                 </div>
 
@@ -283,7 +395,7 @@ NGÀYHS TV LƯƠ
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Số điện thoại liên hệ</label>
                     <div class="relative">
                          <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400"><i class="fa-solid fa-phone"></i></span>
-                        <input type="tel" id="phone" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none" placeholder="09xxxxxxx">
+                        <input type="tel" id="phone" required class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all outline-none" placeholder="09xxxxxxx">
                     </div>
                 </div>
 
@@ -292,7 +404,7 @@ NGÀYHS TV LƯƠ
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1 transition-colors">Ghi Chú</label>
                     <div class="relative">
                         <span class="absolute top-3 left-3 flex items-center text-gray-400"><i class="fa-solid fa-note-sticky"></i></span>
-                        <textarea id="notes" rows="2" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none" placeholder="Nhập ghi chú thêm (nếu có)..."></textarea>
+                        <textarea id="notes" rows="2" class="w-full pl-10 p-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all outline-none" placeholder="Nhập ghi chú thêm (nếu có)..."></textarea>
                     </div>
                 </div>
 
@@ -301,7 +413,7 @@ NGÀYHS TV LƯƠ
                     <button type="button" onclick="resetPage()" class="col-span-2 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3.5 rounded-xl shadow-sm hover:shadow transition-all duration-300 transform active:scale-95 flex justify-center items-center border border-gray-200">
                         <i class="fa-solid fa-rotate-right mr-2 transition-transform duration-500 group-hover:rotate-180"></i> NHẬP LẠI
                     </button>
-                    <button type="submit" id="submitBtn" class="col-span-3 bg-brand-gradient hover:opacity-90 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 transform active:scale-95 flex justify-center items-center btn-hover-effect">
+                    <button type="submit" id="submitBtn" class="col-span-3 bg-brand-gradient hover:opacity-90 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all duration-300 transform active:scale-95 flex justify-center items-center btn-hover-effect">
                         <span class="mr-2">GỬI ĐĂNG KÝ</span> <i class="fa-solid fa-paper-plane"></i>
                     </button>
                 </div>
@@ -309,7 +421,7 @@ NGÀYHS TV LƯƠ
         </div>
         
         <!-- Footer -->
-        <div class="bg-gray-50 p-4 text-center text-xs text-gray-400 border-t">
+        <div class="bg-orange-50 p-4 text-center text-xs text-orange-400 border-t border-orange-200">
             &copy; 2026 Sen Việt Group. Powered by Sen Việt Group.
         </div>
     </div>
@@ -322,34 +434,40 @@ NGÀYHS TV LƯƠ
         const GOOGLE_API_KEY = 'AIzaSyB2JUVRGd-oREdyYyvznfiZ0WAFldr8Mic'; 
         const N8N_WEBHOOK_URL = 'https://senvietgroup.com/webhook/aa821db7-c04a-4ef1-b34f-8fc4bb08d355';
         
-        // --- SNOW EFFECT LOGIC ---
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.innerHTML = '❄';
+        // --- TET 2026 EFFECT LOGIC ---
+        // Replacing snow with: Peach blossom (🌸), Apricot blossom (🌼), Red Envelope (🧧), Lantern (🏮)
+        const tetIcons = ['🌸', '🌼', '🧧', '🏮'];
+        
+        function createTetEffect() {
+            const item = document.createElement('div');
+            item.classList.add('tet-item');
+            
+            // Randomly select an icon
+            const icon = tetIcons[Math.floor(Math.random() * tetIcons.length)];
+            item.innerText = icon;
             
             // Random horizontal position
-            snowflake.style.left = Math.random() * 100 + 'vw';
+            item.style.left = Math.random() * 100 + 'vw';
             
             // Random fall duration between 5s and 10s
-            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's'; 
+            item.style.animationDuration = Math.random() * 5 + 5 + 's'; 
             
-            // Random size between 10px and 20px
-            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            // Random size between 15px and 25px
+            item.style.fontSize = Math.random() * 10 + 15 + 'px';
             
             // Random opacity
-            snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+            item.style.opacity = Math.random() * 0.5 + 0.5;
 
-            document.getElementById('snow-container').appendChild(snowflake);
+            document.getElementById('tet-container').appendChild(item);
 
-            // Remove snowflake after it falls
+            // Remove item after it falls
             setTimeout(() => {
-                snowflake.remove();
+                item.remove();
             }, 10000); // Match max animation duration
         }
 
-        // Create a snowflake every 300ms
-        setInterval(createSnowflake, 300);
+        // Create a Tet item every 400ms (slower than snow for gentle effect)
+        setInterval(createTetEffect, 400);
 
         // --- QR CODE LOGIC ---
         let html5QrcodeScanner = null;
@@ -433,24 +551,88 @@ NGÀYHS TV LƯƠ
             if (!html5QrcodeScanner) {
                 html5QrcodeScanner = new Html5Qrcode("qr-reader");
             }
+            
+            if (isScanning) {
+                await stopQrScanner();
+            }
 
             try {
-                // Tắt camera nếu đang bật để tránh xung đột
-                if (isScanning) {
-                    await stopQrScanner();
+                // Attempt 1: Scan full image
+                try {
+                    const decodedText = await html5QrcodeScanner.scanFile(file, false);
+                    onScanSuccess(decodedText, null);
+                    input.value = ''; // Reset
+                    return;
+                } catch (e) {
+                    console.log("Full image scan failed, trying crop...");
                 }
 
-                // scanFile(file, showImage) - showImage: false để không vẽ lại ảnh lên canvas ẩn
-                const decodedText = await html5QrcodeScanner.scanFile(file, false);
-                onScanSuccess(decodedText, null);
+                // Attempt 2: Crop Top-Right corner (CCCD standard location)
+                const croppedFile = await cropToTopRight(file);
+                if(croppedFile) {
+                    try {
+                        const decodedText = await html5QrcodeScanner.scanFile(croppedFile, false);
+                        onScanSuccess(decodedText, null);
+                        input.value = ''; // Reset
+                        return;
+                    } catch(e) {
+                         // Attempt 3: If strict crop failed, maybe try a larger crop or center?
+                         // For now just error out
+                         console.warn("Cropped scan failed");
+                    }
+                }
                 
+                throw new Error("Cropped scan also failed");
+
             } catch (err) {
                 console.error("File Scan Error:", err);
-                showToast("Không tìm thấy mã QR hợp lệ trong ảnh.", "warning");
+                showToast("Không tìm thấy mã QR. Hãy chụp gần mã QR hơn.", "warning");
+                input.value = '';
             }
-            
-            // Reset input để người dùng có thể chọn lại cùng một ảnh nếu cần
-            input.value = '';
+        }
+
+        function cropToTopRight(file) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    // CCCD QR is usually in the top right quadrant
+                    // Let's crop the top-right 50% width and 50% height
+                    // But to be safe in case of rotation, let's grab the top right quadrant
+                    // Assuming Landscape photo:
+                    
+                    let isPortrait = img.height > img.width;
+                    let sourceX, sourceY, sourceW, sourceH;
+
+                    if (isPortrait) {
+                        // If portrait, try top half, but QR location varies if user held card sideways
+                        // Let's just try cropping top half for now
+                         sourceX = 0;
+                         sourceY = 0;
+                         sourceW = img.width;
+                         sourceH = img.height * 0.5;
+                    } else {
+                        // Landscape: Top Right
+                        sourceX = img.width * 0.5; // Start from middle width
+                        sourceY = 0;              // Start from top
+                        sourceW = img.width * 0.5; // Take right half
+                        sourceH = img.height * 0.6; // Take top 60%
+                    }
+
+                    canvas.width = sourceW;
+                    canvas.height = sourceH;
+
+                    ctx.drawImage(img, sourceX, sourceY, sourceW, sourceH, 0, 0, sourceW, sourceH);
+
+                    canvas.toBlob((blob) => {
+                        resolve(new File([blob], "cropped_qr.jpg", { type: "image/jpeg" }));
+                    }, 'image/jpeg', 0.9);
+                };
+                img.onerror = () => resolve(null);
+                img.src = URL.createObjectURL(file);
+            });
         }
 
         function onScanSuccess(decodedText, decodedResult) {
@@ -910,5 +1092,3 @@ NGÀYHS TV LƯƠ
     </script>
 </body>
 </html>
-
-
